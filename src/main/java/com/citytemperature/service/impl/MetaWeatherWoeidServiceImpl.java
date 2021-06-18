@@ -30,7 +30,6 @@ public class MetaWeatherWoeidServiceImpl implements WoeidService {
                         .build())
                 .retrieve()
                 .bodyToMono(MetaWeatherWoeidImpl[].class)
-                .share()
                 .block())
                 .filter(woeid -> woeid.getType().equalsIgnoreCase("city"))
                 .collect(Collectors.toList());
