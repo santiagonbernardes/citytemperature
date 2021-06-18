@@ -5,5 +5,5 @@ import com.citytemperature.domain.contract.Woeid;
 import java.util.List;
 
 public interface WoeidService {
-    List<Woeid> findAllCitiesByName(final String cityName);
+    List<Woeid> findAllWoeidByCitiesName(final String cityName);
 }
