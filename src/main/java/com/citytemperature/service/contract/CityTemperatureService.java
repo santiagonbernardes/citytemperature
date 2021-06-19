@@ -1,10 +1,7 @@
 package com.citytemperature.service.contract;
 
-import com.citytemperature.domain.contract.Woeid;
-import com.citytemperature.dto.CityTemperatureResponseDto;
-
-import java.util.List;
+import com.citytemperature.domain.contract.CityTemperature;
 
 public interface CityTemperatureService {
-    List<CityTemperatureResponseDto> findCitiesTemperature(final List<Woeid> citiesWoeid);
+    CityTemperature findCityTemperature(final String cityName);
 }

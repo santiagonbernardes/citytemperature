@@ -1,25 +1,20 @@
-package com.citytemperature.config;
+package com.citytemperature.helpers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.json.Jackson2JsonDecoder;
 import org.springframework.http.codec.json.Jackson2JsonEncoder;
 import org.springframework.web.reactive.function.client.WebClient;
 
-@Configuration
-public class WebClientConfig {
+public class TestWebClientHelper {
 
-    @Bean
-    public WebClient getMetaWeatherWebClient(final ObjectMapper mapper) {
-        // By default Jackson can't understand LocalDateTime or ZonedDateTime. This method teaches Jackson how to understand them.
+    public static WebClient buildTestWebClient(final String hostname, final Integer port) {
+        final ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
 
         return WebClient.builder()
-                .baseUrl("https://www.metaweather.com/api/location")
-                // Adding the configured mapper to the webclient.
+                .baseUrl(String.format("http://%s:%s", hostname, port))
                 .codecs(clientCodecConfigurer -> clientCodecConfigurer
                         .defaultCodecs().jackson2JsonDecoder(new Jackson2JsonDecoder(mapper, MediaType.APPLICATION_JSON)))
                 .codecs(clientCodecConfigurer -> clientCodecConfigurer

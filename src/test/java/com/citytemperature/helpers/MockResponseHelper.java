@@ -2,6 +2,7 @@ package com.citytemperature.helpers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import okhttp3.mockwebserver.MockResponse;
 import org.springframework.http.MediaType;
 
@@ -13,6 +14,7 @@ public class MockResponseHelper {
 
     public MockResponseHelper() {
         this.mapper = new ObjectMapper();
+        this.mapper.registerModule(new JavaTimeModule());
     }
 
     public MockResponse getMockResponseStatusCode200(final Object responseBody) {

@@ -3,13 +3,13 @@ package com.citytemperature.service.impl;
 import com.citytemperature.builders.MetaWeatherWoeidResponseBuilder;
 import com.citytemperature.domain.contract.Woeid;
 import com.citytemperature.helpers.MockResponseHelper;
+import com.citytemperature.helpers.TestWebClientHelper;
 import com.citytemperature.responses.MetaWeatherWoeidResponse;
 import com.citytemperature.service.contract.WoeidService;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -29,9 +29,7 @@ class MetaWeatherWoeidServiceImplTest {
     void setupTestsVariables() throws IOException {
         this.mockServer = new MockWebServer();
         this.mockServer.start();
-        underTest = new MetaWeatherWoeidServiceImpl(WebClient.builder()
-                .baseUrl(String.format("http://%s:%s", this.mockServer.getHostName(), this.mockServer.getPort()))
-                .build());
+        underTest = new MetaWeatherWoeidServiceImpl(TestWebClientHelper.buildTestWebClient(this.mockServer.getHostName(), this.mockServer.getPort()));
         this.helper = new MockResponseHelper();
     }
 
