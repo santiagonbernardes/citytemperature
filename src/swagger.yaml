@@ -1,0 +1,74 @@
+swagger: "2.0"
+info:
+  description: "This API provides information about city temperature around the world."
+  version: "1.0.0"
+  title: "City Temperature"
+  contact:
+    email: "santiagobernardes@gmail.com"
+schemes:
+- "https"
+- "http"
+paths:
+  /api/v1/cities/{cityName}/temperature:
+    get:
+      summary: "Gets temperature."
+      description: "Gets the temperature of a city, given its name."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "cityName"
+        description: "Name of the city which temperature you are searching."
+        required: true
+        type: string
+        maxLength: 85
+      responses:
+        "200":
+          description: "Sucessfully returned a city temperature."
+          schema:
+            type: object
+            properties:
+              city:
+                type: string
+                description: "Name of the city found."
+                example: São Paulo
+              date:
+                type: string
+                description: "When the temperature is expected to happen. This field takes into account the city timezone."
+                format: date
+                example: "2021-10-17"
+              temperatureInCelsius:
+                type: number
+                description: "Average temperature of the day represented in `date` in celsius."
+                example: 28.4
+              temperatureInFahrenheit:
+                type: number
+                description: "Average temperature of the day represented in `date` in fahrenheit."
+                example: 83.12
+        "400":
+          description: "There is something wrong with how your request was made."
+          schema:
+            $ref: '#/components/schemas/Error'
+        "404":
+          description: "A city or its temperature could not be found."
+          schema:
+            $ref: '#/components/schemas/Error'
+        "500":
+          description: "Something went wrong on the server while processing your request."
+          schema:
+            $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        details:
+          type: string
+          description: "Details of the error so you can handle it the best way possible."
+          example: "Clear message about what went wrong with your request."
+
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /santiagonbernardes/city-temperature/1.0.0
