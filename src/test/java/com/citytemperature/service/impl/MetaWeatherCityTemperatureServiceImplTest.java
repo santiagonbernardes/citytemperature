@@ -5,6 +5,7 @@ import com.citytemperature.domain.contract.Woeid;
 import com.citytemperature.domain.impl.MetaWeatherWoeidImpl;
 import com.citytemperature.exceptions.CityNotFoundException;
 import com.citytemperature.exceptions.CityTemperatureNotFoundException;
+import com.citytemperature.exceptions.MetaWeatherIntegrationException;
 import com.citytemperature.helpers.MockResponseHelper;
 import com.citytemperature.helpers.TestWebClientHelper;
 import com.citytemperature.responses.MetaWeatherCityTemperatureResponseMock;
@@ -108,6 +109,28 @@ class MetaWeatherCityTemperatureServiceImplTest {
     void shouldRaiseCityTemperatureNotFoundExceptionWhenConsolidatedWeatherIsNull() {
         mockServer.enqueue(helper.getMockResponseStatusCode200(new MetaWeatherCityTemperatureResponseMock(null, "Test")));
         assertThrows(CityTemperatureNotFoundException.class,
+                () -> this.underTest.findCityTemperature("Any"));
+    }
+
+    @Test
+    void shouldRaiseCityTemperatureNotFoundExceptionWhenResponseBodyIsNull() {
+        mockServer.enqueue(helper.getMockResponseStatusCode200(null));
+        assertThrows(CityTemperatureNotFoundException.class,
+                () -> this.underTest.findCityTemperature("Any"));
+    }
+
+    @Test
+    void shouldRaiseCityTemperatureNotFoundExceptionWhenMetaWeatherReturnsClientErrorStatusCode() {
+        // Im returning a valid body so I don't get fooled and the exception is raised because the response is null.
+        mockServer.enqueue(helper.getMockResponseWithStatusCodeAndBody(404, new MetaWeatherCityTemperatureResponseMock(Collections.emptyList(), "Test")));
+        assertThrows(CityTemperatureNotFoundException.class,
+                () -> this.underTest.findCityTemperature("Any"));
+    }
+
+    @Test
+    void shouldRaiseCityMetaWeatherIntegrationExceptionWhenMetaWeatherReturnsServerErrorStatusCode() {
+        mockServer.enqueue(helper.getMockResponseWithStatusCodeAndBody(500, null));
+        assertThrows(MetaWeatherIntegrationException.class,
                 () -> this.underTest.findCityTemperature("Any"));
     }
 }
