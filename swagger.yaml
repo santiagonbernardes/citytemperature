@@ -50,15 +50,19 @@ paths:
         "400":
           description: "There is something wrong with how your request was made."
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
         "404":
           description: "A city or its temperature could not be found."
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
         "500":
           description: "Something went wrong on the server while processing your request."
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
+        "502":
+          description: "One of our inbound servers sent us a response we were not expecting."
+          schema:
+            $ref: "#/components/schemas/Error"
 components:
   schemas:
     Error:
@@ -66,9 +70,9 @@ components:
       properties:
         details:
           type: string
-          description: "Details of the error so you can handle it the best way possible."
+          description: "Details about the error so you can handle it the best way possible."
           example: "Clear message about what went wrong with your request."
 
-# Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
+# Added by API Auto Mocking Plugin
 basePath: /santiagonbernardes/city-temperature/1.0.0

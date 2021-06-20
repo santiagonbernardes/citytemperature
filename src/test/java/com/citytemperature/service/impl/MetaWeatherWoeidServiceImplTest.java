@@ -2,6 +2,7 @@ package com.citytemperature.service.impl;
 
 import com.citytemperature.builders.MetaWeatherWoeidResponseBuilder;
 import com.citytemperature.domain.contract.Woeid;
+import com.citytemperature.exceptions.MetaWeatherIntegrationException;
 import com.citytemperature.helpers.MockResponseHelper;
 import com.citytemperature.helpers.TestWebClientHelper;
 import com.citytemperature.responses.MetaWeatherWoeidResponse;
@@ -10,6 +11,8 @@ import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -18,6 +21,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MetaWeatherWoeidServiceImplTest {
 
@@ -116,5 +121,20 @@ class MetaWeatherWoeidServiceImplTest {
         assertEquals(expectedIds.get(3), citiesWoeid.get(3).getId());
         assertEquals(expectedIds.get(4), citiesWoeid.get(4).getId());
         assertEquals(expectedIds.get(5), citiesWoeid.get(5).getId());
+    }
+
+    @Test
+    void shouldReturnEmptyListIfWebClientReturnsNull() {
+        this.mockServer.enqueue(helper.getMockResponseStatusCode200(null));
+        final List<Woeid> citiesWoeid = this.underTest.findAllWoeidByCitiesName("Any.");
+        assertTrue(citiesWoeid.isEmpty());
+    }
+
+    @ParameterizedTest(name = "MetaWeather returns {0}.")
+    @ValueSource(ints = {400, 404, 500, 503})
+    void shouldThrowMetaWeatherIntegrationExceptionWhenMetaWeatherReturnsClientOrServerErrorStatusCode(final int statusCode) {
+        this.mockServer.enqueue(helper.getMockResponseWithStatusCodeAndBody(statusCode, null));
+        assertThrows(MetaWeatherIntegrationException.class,
+                () -> this.underTest.findAllWoeidByCitiesName("Any."));
     }
 }

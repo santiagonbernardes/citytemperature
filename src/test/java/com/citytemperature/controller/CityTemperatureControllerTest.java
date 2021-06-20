@@ -4,6 +4,7 @@ import com.citytemperature.domain.contract.CityTemperature;
 import com.citytemperature.domain.impl.MetaWeatherCityTemperatureImpl;
 import com.citytemperature.exceptions.CityNotFoundException;
 import com.citytemperature.exceptions.CityTemperatureNotFoundException;
+import com.citytemperature.exceptions.MetaWeatherIntegrationException;
 import com.citytemperature.service.contract.CityTemperatureService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +88,15 @@ class CityTemperatureControllerTest {
                 .andExpect(status().isInternalServerError())
                 .andExpect(jsonPath("$.details").isNotEmpty())
                 .andExpect(content().json(expectedBody));
+    }
+
+    @Test
+    void shouldReturn502WhenServiceThrowsMetaWeatherIntegrationExceptionAndResponseBodyShouldHaveAClearMessageAboutTheError() throws Exception {
+        when(this.cityTemperatureServiceMock.findCityTemperature(any())).thenThrow(new MetaWeatherIntegrationException("Ignore me."));
+        this.mockMvc
+                .perform(getDefaultRequest())
+                .andExpect(status().isBadGateway())
+                .andExpect(jsonPath("$.details").isNotEmpty());
     }
 
     private MockHttpServletRequestBuilder getDefaultRequest() {
