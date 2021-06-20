@@ -3,6 +3,7 @@ package com.citytemperature.backend.api.metaweather.response;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -26,24 +27,24 @@ public class MetaWeatherConsolidatedWeather {
     private LocalDate applicableDate;
 
     @JsonProperty("min_temp")
-    private Double minTemp;
+    private BigDecimal minTemp;
 
     @JsonProperty("max_temp")
-    private Double maxTemp;
+    private BigDecimal maxTemp;
 
     @JsonProperty("the_temp")
-    private Double theTemp;
+    private BigDecimal theTemp;
 
     @JsonProperty("wind_speed")
-    private Double windSpeed;
+    private BigDecimal windSpeed;
 
     @JsonProperty("wind_direction")
-    private Double windDirection;
+    private BigDecimal windDirection;
 
     @JsonProperty("air_pressure")
-    private Double airPressure;
+    private BigDecimal airPressure;
     private Integer humidity;
-    private Double visibility;
+    private BigDecimal visibility;
     private Integer predictability;
 
     public MetaWeatherConsolidatedWeather() {
@@ -74,27 +75,27 @@ public class MetaWeatherConsolidatedWeather {
         return applicableDate;
     }
 
-    public Double getMinTemp() {
+    public BigDecimal getMinTemp() {
         return minTemp;
     }
 
-    public Double getMaxTemp() {
+    public BigDecimal getMaxTemp() {
         return maxTemp;
     }
 
-    public Double getTheTemp() {
+    public BigDecimal getTheTemp() {
         return theTemp;
     }
 
-    public Double getWindSpeed() {
+    public BigDecimal getWindSpeed() {
         return windSpeed;
     }
 
-    public Double getWindDirection() {
+    public BigDecimal getWindDirection() {
         return windDirection;
     }
 
-    public Double getAirPressure() {
+    public BigDecimal getAirPressure() {
         return airPressure;
     }
 
@@ -102,7 +103,7 @@ public class MetaWeatherConsolidatedWeather {
         return humidity;
     }
 
-    public Double getVisibility() {
+    public BigDecimal getVisibility() {
         return visibility;
     }
 

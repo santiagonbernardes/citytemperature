@@ -2,6 +2,7 @@ package com.citytemperature.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -24,41 +25,41 @@ public class MetaWeatherConsolidatedWeatherMock {
     private final LocalDate applicableDate;
 
     @JsonProperty("min_temp")
-    private final Double minTemp;
+    private final BigDecimal minTemp;
 
     @JsonProperty("max_temp")
-    private final Double maxTemp;
+    private final BigDecimal maxTemp;
 
     @JsonProperty("the_temp")
-    private final Double theTemp;
+    private final BigDecimal theTemp;
 
     @JsonProperty("wind_speed")
-    private final Double windSpeed;
+    private final BigDecimal windSpeed;
 
     @JsonProperty("wind_direction")
-    private final Double windDirection;
+    private final BigDecimal windDirection;
 
     @JsonProperty("air_pressure")
-    private final Double airPressure;
+    private final BigDecimal airPressure;
     private final Integer humidity;
-    private final Double visibility;
+    private final BigDecimal visibility;
     private final Integer predictability;
 
-    public MetaWeatherConsolidatedWeatherMock(final LocalDate applicableDate, final Double theTemp) {
+    public MetaWeatherConsolidatedWeatherMock(final LocalDate applicableDate, final BigDecimal theTemp) {
         this.id = 6406936850333696L;
         this.weatherStateName = "Light Rain";
         this.weatherStateAbbr = "lr";
         this.windDirectionCompass = "ENE";
         this.created = LocalDateTime.now();
         this.applicableDate = applicableDate;
-        this.minTemp = 10.98;
-        this.maxTemp = 17.085;
+        this.minTemp = BigDecimal.valueOf(10.98);
+        this.maxTemp = BigDecimal.valueOf(17.085);
         this.theTemp = theTemp;
-        this.windSpeed = 4.250440011954187;
-        this.windDirection = 77.11379606316441;
-        this.airPressure = 1015.0;
+        this.windSpeed = BigDecimal.valueOf(4.250440011954187);
+        this.windDirection = BigDecimal.valueOf(77.11379606316441);
+        this.airPressure = BigDecimal.valueOf(1015.0);
         this.humidity = 81;
-        this.visibility = 9.105884136642011;
+        this.visibility = BigDecimal.valueOf(9.105884136642011);
         this.predictability = 75;
     }
 
@@ -86,27 +87,27 @@ public class MetaWeatherConsolidatedWeatherMock {
         return applicableDate;
     }
 
-    public Double getMinTemp() {
+    public BigDecimal getMinTemp() {
         return minTemp;
     }
 
-    public Double getMaxTemp() {
+    public BigDecimal getMaxTemp() {
         return maxTemp;
     }
 
-    public Double getTheTemp() {
+    public BigDecimal getTheTemp() {
         return theTemp;
     }
 
-    public Double getWindSpeed() {
+    public BigDecimal getWindSpeed() {
         return windSpeed;
     }
 
-    public Double getWindDirection() {
+    public BigDecimal getWindDirection() {
         return windDirection;
     }
 
-    public Double getAirPressure() {
+    public BigDecimal getAirPressure() {
         return airPressure;
     }
 
@@ -114,7 +115,7 @@ public class MetaWeatherConsolidatedWeatherMock {
         return humidity;
     }
 
-    public Double getVisibility() {
+    public BigDecimal getVisibility() {
         return visibility;
     }
 

@@ -42,7 +42,7 @@ paths:
               temperatureInCelsius:
                 type: number
                 description: "Average temperature of the day represented in `date` in celsius."
-                example: 28.4
+                example: 28.40
               temperatureInFahrenheit:
                 type: number
                 description: "Average temperature of the day represented in `date` in fahrenheit."

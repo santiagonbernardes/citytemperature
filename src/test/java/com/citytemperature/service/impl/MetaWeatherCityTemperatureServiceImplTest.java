@@ -21,6 +21,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
@@ -76,7 +78,7 @@ class MetaWeatherCityTemperatureServiceImplTest {
         final MetaWeatherWoeidImpl secondInList = spy(new MetaWeatherWoeidImpl(2, "Any"));
         final List<Woeid> returnedWoeid = Arrays.asList(firstInList, secondInList);
         when(this.woeidServiceMock.findAllWoeidByCitiesName(any())).thenReturn(returnedWoeid);
-        final MetaWeatherConsolidatedWeatherMock returned = new MetaWeatherConsolidatedWeatherMock(LocalDate.now(), 27.8);
+        final MetaWeatherConsolidatedWeatherMock returned = new MetaWeatherConsolidatedWeatherMock(LocalDate.now(), BigDecimal.valueOf(27.8));
         this.mockServer.enqueue(helper.getMockResponseStatusCode200(new MetaWeatherCityTemperatureResponseMock(Collections.singletonList(returned), "Test")));
         this.underTest.findCityTemperature("Any");
         verify(firstInList, times(1)).getId();
@@ -85,17 +87,17 @@ class MetaWeatherCityTemperatureServiceImplTest {
 
     @Test
     void shouldReturnOldestTheCityTemperatureGivenItsApplicableDate() {
-        final MetaWeatherConsolidatedWeatherMock expected = new MetaWeatherConsolidatedWeatherMock(LocalDate.now(), 27.8);
+        final MetaWeatherConsolidatedWeatherMock expected = new MetaWeatherConsolidatedWeatherMock(LocalDate.now(), BigDecimal.valueOf(27.8));
         final List<MetaWeatherConsolidatedWeatherMock> returnedTemperature = Arrays.asList(
-                new MetaWeatherConsolidatedWeatherMock(LocalDate.now().plusDays(5), 30.),
+                new MetaWeatherConsolidatedWeatherMock(LocalDate.now().plusDays(5), BigDecimal.valueOf(30.)),
                 expected,
-                new MetaWeatherConsolidatedWeatherMock(LocalDate.now().plusDays(2), 29.4),
-                new MetaWeatherConsolidatedWeatherMock(LocalDate.now().plusDays(3), 29.7)
+                new MetaWeatherConsolidatedWeatherMock(LocalDate.now().plusDays(2), BigDecimal.valueOf(29.4)),
+                new MetaWeatherConsolidatedWeatherMock(LocalDate.now().plusDays(3), BigDecimal.valueOf(29.7))
         );
         mockServer.enqueue(helper.getMockResponseStatusCode200(new MetaWeatherCityTemperatureResponseMock(returnedTemperature, "Test")));
         final CityTemperature actual = underTest.findCityTemperature("Any");
         assertEquals(expected.getApplicableDate(), actual.getDateThisTemperatureIsExpected());
-        assertEquals(expected.getTheTemp(), actual.getTemperatureInCelsius());
+        assertEquals(0, expected.getTheTemp().compareTo(actual.getTemperatureInCelsius()));
     }
 
     @Test

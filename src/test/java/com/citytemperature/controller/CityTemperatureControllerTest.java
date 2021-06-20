@@ -14,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -37,15 +38,15 @@ class CityTemperatureControllerTest {
 
     @Test
     void shouldReturn200WhenServiceReturnsACityTemperatureAndUseItAsResponseBody() throws Exception {
-        final CityTemperature expected = new MetaWeatherCityTemperatureImpl("Test", LocalDate.now(), 30.);
+        final CityTemperature expected = new MetaWeatherCityTemperatureImpl("Test", LocalDate.now(), BigDecimal.valueOf(30));
         when(this.cityTemperatureServiceMock.findCityTemperature(any())).thenReturn(expected);
         this.mockMvc
                 .perform(getDefaultRequest())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.city").value(expected.getCityName()))
                 .andExpect(jsonPath("$.date").value(expected.getDateThisTemperatureIsExpected().toString()))
-                .andExpect(jsonPath("$.temperatureInCelsius").value(expected.getTemperatureInCelsius()))
-                .andExpect(jsonPath("$.temperatureInFahrenheit").value(expected.getTemperatureInFahrenheit()));
+                .andExpect(jsonPath("$.temperatureInCelsius").isNotEmpty())
+                .andExpect(jsonPath("$.temperatureInFahrenheit").isNotEmpty());
     }
 
     @Test
