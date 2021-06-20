@@ -5,37 +5,39 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum MetaWeatherParentMock {
+  DEFAULT("England", "Region / State / Province", 24554868, "52.883560,-1.974060");
 
-    DEFAULT("England", "Region / State / Province", 24554868, "52.883560,-1.974060");
+  private final String title;
 
-    private final String title;
+  @JsonProperty("location_type")
+  private final String locationType;
 
-    @JsonProperty("location_type")
-    private final String locationType;
-    private final Integer woeid;
-    @JsonProperty("latt_long")
-    private final String latLong;
+  private final Integer woeid;
 
-    MetaWeatherParentMock(final String title, final String locationType, final Integer woeid, final String latLong) {
-        this.title = title;
-        this.locationType = locationType;
-        this.woeid = woeid;
-        this.latLong = latLong;
-    }
+  @JsonProperty("latt_long")
+  private final String latLong;
 
-    public String getTitle() {
-        return title;
-    }
+  MetaWeatherParentMock(
+      final String title, final String locationType, final Integer woeid, final String latLong) {
+    this.title = title;
+    this.locationType = locationType;
+    this.woeid = woeid;
+    this.latLong = latLong;
+  }
 
-    public String getLocationType() {
-        return locationType;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public Integer getWoeid() {
-        return woeid;
-    }
+  public String getLocationType() {
+    return locationType;
+  }
 
-    public String getLatLong() {
-        return latLong;
-    }
+  public Integer getWoeid() {
+    return woeid;
+  }
+
+  public String getLatLong() {
+    return latLong;
+  }
 }

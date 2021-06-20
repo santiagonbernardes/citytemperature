@@ -8,96 +8,98 @@ import java.util.List;
 
 public class MetaWeatherCityTemperatureResponseMock {
 
-    @JsonProperty("consolidated_weather")
-    private final List<MetaWeatherConsolidatedWeatherMock> consolidatedWeather;
+  @JsonProperty("consolidated_weather")
+  private final List<MetaWeatherConsolidatedWeatherMock> consolidatedWeather;
 
-    private final ZonedDateTime time;
+  private final ZonedDateTime time;
 
-    @JsonProperty("sun_rise")
-    private final ZonedDateTime sunRise;
+  @JsonProperty("sun_rise")
+  private final ZonedDateTime sunRise;
 
-    @JsonProperty("sun_set")
-    private final ZonedDateTime sunSet;
+  @JsonProperty("sun_set")
+  private final ZonedDateTime sunSet;
 
-    @JsonProperty("timezone_name")
-    private final String timezoneName;
-    private final MetaWeatherParentMock parent;
-    private final List<MetaWeatherSourceMock> sources;
-    private final String title;
+  @JsonProperty("timezone_name")
+  private final String timezoneName;
 
-    @JsonProperty("location_type")
-    private final String locationType;
+  private final MetaWeatherParentMock parent;
+  private final List<MetaWeatherSourceMock> sources;
+  private final String title;
 
-    @JsonProperty("woeid")
-    private final Integer woeid;
+  @JsonProperty("location_type")
+  private final String locationType;
 
-    @JsonProperty("latt_long")
-    private final String latLong;
+  @JsonProperty("woeid")
+  private final Integer woeid;
 
-    @JsonProperty("timezone")
-    private final String timezone;
+  @JsonProperty("latt_long")
+  private final String latLong;
 
-    public MetaWeatherCityTemperatureResponseMock(List<MetaWeatherConsolidatedWeatherMock> consolidatedWeather, String title) {
-        final ZonedDateTime now = ZonedDateTime.now();
-        this.consolidatedWeather = consolidatedWeather;
-        this.time = now;
-        this.sunRise = now;
-        this.sunSet = now;
-        this.timezoneName = "LMT";
-        this.parent = MetaWeatherParentMock.DEFAULT;
-        this.sources = Arrays.asList(MetaWeatherSourceMock.values());
-        this.title = title;
-        this.locationType = "City";
-        this.woeid = 44418;
-        this.latLong = "51.506321,-0.12714";
-        this.timezone = "Europe/London";
-    }
+  @JsonProperty("timezone")
+  private final String timezone;
 
-    public List<MetaWeatherConsolidatedWeatherMock> getConsolidatedWeather() {
-        return consolidatedWeather;
-    }
+  public MetaWeatherCityTemperatureResponseMock(
+      List<MetaWeatherConsolidatedWeatherMock> consolidatedWeather, String title) {
+    final ZonedDateTime now = ZonedDateTime.now();
+    this.consolidatedWeather = consolidatedWeather;
+    this.time = now;
+    this.sunRise = now;
+    this.sunSet = now;
+    this.timezoneName = "LMT";
+    this.parent = MetaWeatherParentMock.DEFAULT;
+    this.sources = Arrays.asList(MetaWeatherSourceMock.values());
+    this.title = title;
+    this.locationType = "City";
+    this.woeid = 44418;
+    this.latLong = "51.506321,-0.12714";
+    this.timezone = "Europe/London";
+  }
 
-    public ZonedDateTime getTime() {
-        return time;
-    }
+  public List<MetaWeatherConsolidatedWeatherMock> getConsolidatedWeather() {
+    return consolidatedWeather;
+  }
 
-    public ZonedDateTime getSunRise() {
-        return sunRise;
-    }
+  public ZonedDateTime getTime() {
+    return time;
+  }
 
-    public ZonedDateTime getSunSet() {
-        return sunSet;
-    }
+  public ZonedDateTime getSunRise() {
+    return sunRise;
+  }
 
-    public String getTimezoneName() {
-        return timezoneName;
-    }
+  public ZonedDateTime getSunSet() {
+    return sunSet;
+  }
 
-    public MetaWeatherParentMock getParent() {
-        return parent;
-    }
+  public String getTimezoneName() {
+    return timezoneName;
+  }
 
-    public List<MetaWeatherSourceMock> getSources() {
-        return sources;
-    }
+  public MetaWeatherParentMock getParent() {
+    return parent;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public List<MetaWeatherSourceMock> getSources() {
+    return sources;
+  }
 
-    public String getLocationType() {
-        return locationType;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public Integer getWoeid() {
-        return woeid;
-    }
+  public String getLocationType() {
+    return locationType;
+  }
 
-    public String getLatLong() {
-        return latLong;
-    }
+  public Integer getWoeid() {
+    return woeid;
+  }
 
-    public String getTimezone() {
-        return timezone;
-    }
+  public String getLatLong() {
+    return latLong;
+  }
+
+  public String getTimezone() {
+    return timezone;
+  }
 }

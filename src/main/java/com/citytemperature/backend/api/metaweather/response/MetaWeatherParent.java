@@ -5,32 +5,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MetaWeatherParent {
-    private String title;
+  private String title;
 
-    @JsonProperty("location_type")
-    private String locationType;
-    private Integer woeid;
+  @JsonProperty("location_type")
+  private String locationType;
 
-    @JsonProperty("latt_long")
-    private String latLong;
+  private Integer woeid;
 
-    public MetaWeatherParent() {
-        // Jackson uses this.
-    }
+  @JsonProperty("latt_long")
+  private String latLong;
 
-    public String getTitle() {
-        return title;
-    }
+  public MetaWeatherParent() {
+    // Jackson uses this.
+  }
 
-    public String getLocationType() {
-        return locationType;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public Integer getWoeid() {
-        return woeid;
-    }
+  public String getLocationType() {
+    return locationType;
+  }
 
-    public String getLatLong() {
-        return latLong;
-    }
+  public Integer getWoeid() {
+    return woeid;
+  }
+
+  public String getLatLong() {
+    return latLong;
+  }
 }

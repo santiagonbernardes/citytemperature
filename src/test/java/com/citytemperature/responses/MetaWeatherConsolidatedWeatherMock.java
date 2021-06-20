@@ -8,118 +8,121 @@ import java.time.LocalDateTime;
 
 public class MetaWeatherConsolidatedWeatherMock {
 
-    @JsonProperty("id")
-    private final Long id;
+  @JsonProperty("id")
+  private final Long id;
 
-    @JsonProperty("weather_state_name")
-    private final String weatherStateName;
+  @JsonProperty("weather_state_name")
+  private final String weatherStateName;
 
-    @JsonProperty("weather_state_abbr")
-    private final String weatherStateAbbr;
+  @JsonProperty("weather_state_abbr")
+  private final String weatherStateAbbr;
 
-    @JsonProperty("wind_direction_compass")
-    private final String windDirectionCompass;
-    private final LocalDateTime created;
+  @JsonProperty("wind_direction_compass")
+  private final String windDirectionCompass;
 
-    @JsonProperty("applicable_date") // usar format?
-    private final LocalDate applicableDate;
+  private final LocalDateTime created;
 
-    @JsonProperty("min_temp")
-    private final BigDecimal minTemp;
+  @JsonProperty("applicable_date") // usar format?
+  private final LocalDate applicableDate;
 
-    @JsonProperty("max_temp")
-    private final BigDecimal maxTemp;
+  @JsonProperty("min_temp")
+  private final BigDecimal minTemp;
 
-    @JsonProperty("the_temp")
-    private final BigDecimal theTemp;
+  @JsonProperty("max_temp")
+  private final BigDecimal maxTemp;
 
-    @JsonProperty("wind_speed")
-    private final BigDecimal windSpeed;
+  @JsonProperty("the_temp")
+  private final BigDecimal theTemp;
 
-    @JsonProperty("wind_direction")
-    private final BigDecimal windDirection;
+  @JsonProperty("wind_speed")
+  private final BigDecimal windSpeed;
 
-    @JsonProperty("air_pressure")
-    private final BigDecimal airPressure;
-    private final Integer humidity;
-    private final BigDecimal visibility;
-    private final Integer predictability;
+  @JsonProperty("wind_direction")
+  private final BigDecimal windDirection;
 
-    public MetaWeatherConsolidatedWeatherMock(final LocalDate applicableDate, final BigDecimal theTemp) {
-        this.id = 6406936850333696L;
-        this.weatherStateName = "Light Rain";
-        this.weatherStateAbbr = "lr";
-        this.windDirectionCompass = "ENE";
-        this.created = LocalDateTime.now();
-        this.applicableDate = applicableDate;
-        this.minTemp = BigDecimal.valueOf(10.98);
-        this.maxTemp = BigDecimal.valueOf(17.085);
-        this.theTemp = theTemp;
-        this.windSpeed = BigDecimal.valueOf(4.250440011954187);
-        this.windDirection = BigDecimal.valueOf(77.11379606316441);
-        this.airPressure = BigDecimal.valueOf(1015.0);
-        this.humidity = 81;
-        this.visibility = BigDecimal.valueOf(9.105884136642011);
-        this.predictability = 75;
-    }
+  @JsonProperty("air_pressure")
+  private final BigDecimal airPressure;
 
-    public Long getId() {
-        return id;
-    }
+  private final Integer humidity;
+  private final BigDecimal visibility;
+  private final Integer predictability;
 
-    public String getWeatherStateName() {
-        return weatherStateName;
-    }
+  public MetaWeatherConsolidatedWeatherMock(
+      final LocalDate applicableDate, final BigDecimal theTemp) {
+    this.id = 6406936850333696L;
+    this.weatherStateName = "Light Rain";
+    this.weatherStateAbbr = "lr";
+    this.windDirectionCompass = "ENE";
+    this.created = LocalDateTime.now();
+    this.applicableDate = applicableDate;
+    this.minTemp = BigDecimal.valueOf(10.98);
+    this.maxTemp = BigDecimal.valueOf(17.085);
+    this.theTemp = theTemp;
+    this.windSpeed = BigDecimal.valueOf(4.250440011954187);
+    this.windDirection = BigDecimal.valueOf(77.11379606316441);
+    this.airPressure = BigDecimal.valueOf(1015.0);
+    this.humidity = 81;
+    this.visibility = BigDecimal.valueOf(9.105884136642011);
+    this.predictability = 75;
+  }
 
-    public String getWeatherStateAbbr() {
-        return weatherStateAbbr;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getWindDirectionCompass() {
-        return windDirectionCompass;
-    }
+  public String getWeatherStateName() {
+    return weatherStateName;
+  }
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
+  public String getWeatherStateAbbr() {
+    return weatherStateAbbr;
+  }
 
-    public LocalDate getApplicableDate() {
-        return applicableDate;
-    }
+  public String getWindDirectionCompass() {
+    return windDirectionCompass;
+  }
 
-    public BigDecimal getMinTemp() {
-        return minTemp;
-    }
+  public LocalDateTime getCreated() {
+    return created;
+  }
 
-    public BigDecimal getMaxTemp() {
-        return maxTemp;
-    }
+  public LocalDate getApplicableDate() {
+    return applicableDate;
+  }
 
-    public BigDecimal getTheTemp() {
-        return theTemp;
-    }
+  public BigDecimal getMinTemp() {
+    return minTemp;
+  }
 
-    public BigDecimal getWindSpeed() {
-        return windSpeed;
-    }
+  public BigDecimal getMaxTemp() {
+    return maxTemp;
+  }
 
-    public BigDecimal getWindDirection() {
-        return windDirection;
-    }
+  public BigDecimal getTheTemp() {
+    return theTemp;
+  }
 
-    public BigDecimal getAirPressure() {
-        return airPressure;
-    }
+  public BigDecimal getWindSpeed() {
+    return windSpeed;
+  }
 
-    public Integer getHumidity() {
-        return humidity;
-    }
+  public BigDecimal getWindDirection() {
+    return windDirection;
+  }
 
-    public BigDecimal getVisibility() {
-        return visibility;
-    }
+  public BigDecimal getAirPressure() {
+    return airPressure;
+  }
 
-    public Integer getPredictability() {
-        return predictability;
-    }
+  public Integer getHumidity() {
+    return humidity;
+  }
+
+  public BigDecimal getVisibility() {
+    return visibility;
+  }
+
+  public Integer getPredictability() {
+    return predictability;
+  }
 }

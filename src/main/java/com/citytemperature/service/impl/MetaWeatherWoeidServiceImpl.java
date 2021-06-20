@@ -18,29 +18,35 @@ import java.util.stream.Collectors;
 @Service("MetaWeatherWoeidService")
 public class MetaWeatherWoeidServiceImpl implements WoeidService {
 
-    private final WebClient webClient;
+  private final WebClient webClient;
 
-    @Autowired
-    public MetaWeatherWoeidServiceImpl(final WebClient metaWeatherWebClient) {
-        this.webClient = metaWeatherWebClient;
-    }
+  @Autowired
+  public MetaWeatherWoeidServiceImpl(final WebClient metaWeatherWebClient) {
+    this.webClient = metaWeatherWebClient;
+  }
 
-    @Override
-    public List<Woeid> findAllWoeidByCitiesName(final String cityName) {
-        final MetaWeatherWoeidImpl[] woeids = Optional.ofNullable(webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/search/")
-                        .queryParam("query", cityName)
-                        .build())
-                .retrieve()
-                .onStatus(HttpStatus::isError, clientResponse -> Mono.error(new MetaWeatherIntegrationException("MetaWeather returned error status code.")))
-                .bodyToMono(MetaWeatherWoeidImpl[].class)
-                .block())
-                .orElse(new MetaWeatherWoeidImpl[0]);
+  @Override
+  public List<Woeid> findAllWoeidByCitiesName(final String cityName) {
+    final MetaWeatherWoeidImpl[] woeids =
+        Optional.ofNullable(
+                webClient
+                    .get()
+                    .uri(
+                        uriBuilder ->
+                            uriBuilder.path("/search/").queryParam("query", cityName).build())
+                    .retrieve()
+                    .onStatus(
+                        HttpStatus::isError,
+                        clientResponse ->
+                            Mono.error(
+                                new MetaWeatherIntegrationException(
+                                    "MetaWeather returned error status code.")))
+                    .bodyToMono(MetaWeatherWoeidImpl[].class)
+                    .block())
+            .orElse(new MetaWeatherWoeidImpl[0]);
 
-        return Arrays.stream(woeids)
-                .filter(woeid -> woeid.getType().equalsIgnoreCase("city"))
-                .collect(Collectors.toList());
-    }
-
+    return Arrays.stream(woeids)
+        .filter(woeid -> woeid.getType().equalsIgnoreCase("city"))
+        .collect(Collectors.toList());
+  }
 }

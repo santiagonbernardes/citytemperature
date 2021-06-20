@@ -8,84 +8,85 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MetaWeatherCityTemperatureResponse {
-    @JsonProperty("consolidated_weather")
-    private List<MetaWeatherConsolidatedWeather> consolidatedWeather;
+  @JsonProperty("consolidated_weather")
+  private List<MetaWeatherConsolidatedWeather> consolidatedWeather;
 
-    private ZonedDateTime time;
+  private ZonedDateTime time;
 
-    @JsonProperty("sun_rise")
-    private ZonedDateTime sunRise;
+  @JsonProperty("sun_rise")
+  private ZonedDateTime sunRise;
 
-    @JsonProperty("sun_set")
-    private ZonedDateTime sunSet;
+  @JsonProperty("sun_set")
+  private ZonedDateTime sunSet;
 
-    @JsonProperty("timezone_name")
-    private String timezoneName;
-    private MetaWeatherParent parent;
-    private List<MetaWeatherSource> sources;
-    private String title;
+  @JsonProperty("timezone_name")
+  private String timezoneName;
 
-    @JsonProperty("location_type")
-    private String locationType;
+  private MetaWeatherParent parent;
+  private List<MetaWeatherSource> sources;
+  private String title;
 
-    @JsonProperty("woeid")
-    private Integer woeid;
+  @JsonProperty("location_type")
+  private String locationType;
 
-    @JsonProperty("latt_long")
-    private String latLong;
+  @JsonProperty("woeid")
+  private Integer woeid;
 
-    @JsonProperty("timezone")
-    private String timezone;
+  @JsonProperty("latt_long")
+  private String latLong;
 
-    public MetaWeatherCityTemperatureResponse() {
-        // Jackson uses this.
-    }
+  @JsonProperty("timezone")
+  private String timezone;
 
-    public List<MetaWeatherConsolidatedWeather> getConsolidatedWeather() {
-        return consolidatedWeather;
-    }
+  public MetaWeatherCityTemperatureResponse() {
+    // Jackson uses this.
+  }
 
-    public ZonedDateTime getTime() {
-        return time;
-    }
+  public List<MetaWeatherConsolidatedWeather> getConsolidatedWeather() {
+    return consolidatedWeather;
+  }
 
-    public ZonedDateTime getSunRise() {
-        return sunRise;
-    }
+  public ZonedDateTime getTime() {
+    return time;
+  }
 
-    public ZonedDateTime getSunSet() {
-        return sunSet;
-    }
+  public ZonedDateTime getSunRise() {
+    return sunRise;
+  }
 
-    public String getTimezoneName() {
-        return timezoneName;
-    }
+  public ZonedDateTime getSunSet() {
+    return sunSet;
+  }
 
-    public MetaWeatherParent getParent() {
-        return parent;
-    }
+  public String getTimezoneName() {
+    return timezoneName;
+  }
 
-    public List<MetaWeatherSource> getSources() {
-        return sources;
-    }
+  public MetaWeatherParent getParent() {
+    return parent;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public List<MetaWeatherSource> getSources() {
+    return sources;
+  }
 
-    public String getLocationType() {
-        return locationType;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public Integer getWoeid() {
-        return woeid;
-    }
+  public String getLocationType() {
+    return locationType;
+  }
 
-    public String getLatLong() {
-        return latLong;
-    }
+  public Integer getWoeid() {
+    return woeid;
+  }
 
-    public String getTimezone() {
-        return timezone;
-    }
+  public String getLatLong() {
+    return latLong;
+  }
+
+  public String getTimezone() {
+    return timezone;
+  }
 }

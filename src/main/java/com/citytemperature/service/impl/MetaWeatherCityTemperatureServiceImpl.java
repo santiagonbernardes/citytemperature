@@ -23,44 +23,61 @@ import java.util.List;
 @Service("MetaWeatherCityTemperatureService")
 public class MetaWeatherCityTemperatureServiceImpl implements CityTemperatureService {
 
-    private final WebClient webClient;
-    private final WoeidService woeidService;
+  private final WebClient webClient;
+  private final WoeidService woeidService;
 
-    @Autowired
-    public MetaWeatherCityTemperatureServiceImpl(@Qualifier("MetaWeatherWoeidService") final WoeidService woeidService,
-                                                 WebClient metaWeatherWebClient) {
-        this.webClient = metaWeatherWebClient;
-        this.woeidService = woeidService;
+  @Autowired
+  public MetaWeatherCityTemperatureServiceImpl(
+      @Qualifier("MetaWeatherWoeidService") final WoeidService woeidService,
+      WebClient metaWeatherWebClient) {
+    this.webClient = metaWeatherWebClient;
+    this.woeidService = woeidService;
+  }
+
+  @Override
+  public CityTemperature findCityTemperature(String cityName) {
+    final List<Woeid> everyWoeidFound = this.woeidService.findAllWoeidByCitiesName(cityName);
+    final String cityNotFoundMessage =
+        String.format(
+            "We found a city with the name %s, but we couldn't find its temperature.", cityName);
+
+    if (everyWoeidFound.isEmpty()) {
+      throw new CityNotFoundException(
+          String.format("We couldn't find any city with the name %s.", cityName));
     }
 
-    @Override
-    public CityTemperature findCityTemperature(String cityName) {
-        final List<Woeid> everyWoeidFound = this.woeidService.findAllWoeidByCitiesName(cityName);
-        final String cityNotFoundMessage = String.format("We found a city with the name %s, but we couldn't find its temperature.", cityName);
+    final MetaWeatherCityTemperatureResponse cityTemperature =
+        this.webClient
+            .get()
+            .uri(uriBuilder -> uriBuilder.path("/{woeid}/").build(everyWoeidFound.get(0).getId()))
+            .retrieve()
+            .onStatus(
+                HttpStatus::is4xxClientError,
+                clientResponse ->
+                    Mono.error(new CityTemperatureNotFoundException(cityNotFoundMessage)))
+            .onStatus(
+                HttpStatus::is5xxServerError,
+                clientResponse ->
+                    Mono.error(
+                        new MetaWeatherIntegrationException(
+                            "Meta Weather returned error status code.")))
+            .bodyToMono(MetaWeatherCityTemperatureResponse.class)
+            .block();
 
-        if (everyWoeidFound.isEmpty()) {
-            throw new CityNotFoundException(String.format("We couldn't find any city with the name %s.", cityName));
-        }
-
-        final MetaWeatherCityTemperatureResponse cityTemperature = this.webClient
-                .get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/{woeid}/")
-                        .build(everyWoeidFound.get(0).getId()))
-                .retrieve()
-                .onStatus(HttpStatus::is4xxClientError,clientResponse -> Mono.error(new CityTemperatureNotFoundException(cityNotFoundMessage)))
-                .onStatus(HttpStatus::is5xxServerError, clientResponse -> Mono.error(new MetaWeatherIntegrationException("Meta Weather returned error status code.")))
-                .bodyToMono(MetaWeatherCityTemperatureResponse.class)
-                .block();
-
-        if (cityTemperature == null || cityTemperature.getConsolidatedWeather() == null || cityTemperature.getConsolidatedWeather().isEmpty()) {
-            throw new CityTemperatureNotFoundException(cityNotFoundMessage);
-        }
-
-        final MetaWeatherConsolidatedWeather mostRecentTemperature = cityTemperature.getConsolidatedWeather().stream()
-                .min(Comparator.comparing(MetaWeatherConsolidatedWeather::getApplicableDate))
-                .get();
-
-        return new MetaWeatherCityTemperatureImpl(cityTemperature.getTitle(), mostRecentTemperature.getApplicableDate(), mostRecentTemperature.getTheTemp());
+    if (cityTemperature == null
+        || cityTemperature.getConsolidatedWeather() == null
+        || cityTemperature.getConsolidatedWeather().isEmpty()) {
+      throw new CityTemperatureNotFoundException(cityNotFoundMessage);
     }
+
+    final MetaWeatherConsolidatedWeather mostRecentTemperature =
+        cityTemperature.getConsolidatedWeather().stream()
+            .min(Comparator.comparing(MetaWeatherConsolidatedWeather::getApplicableDate))
+            .get();
+
+    return new MetaWeatherCityTemperatureImpl(
+        cityTemperature.getTitle(),
+        mostRecentTemperature.getApplicableDate(),
+        mostRecentTemperature.getTheTemp());
+  }
 }

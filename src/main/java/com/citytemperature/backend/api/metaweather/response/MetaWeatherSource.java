@@ -6,30 +6,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MetaWeatherSource {
 
-    private String title;
-    private String slug;
-    private String url;
+  private String title;
+  private String slug;
+  private String url;
 
-    @JsonProperty("crawl_rate")
-    private Integer crawlRate;
+  @JsonProperty("crawl_rate")
+  private Integer crawlRate;
 
-    public MetaWeatherSource() {
-        // Jackson uses this.
-    }
+  public MetaWeatherSource() {
+    // Jackson uses this.
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public String getSlug() {
-        return slug;
-    }
+  public String getSlug() {
+    return slug;
+  }
 
-    public String getUrl() {
-        return url;
-    }
+  public String getUrl() {
+    return url;
+  }
 
-    public Integer getCrawlRate() {
-        return crawlRate;
-    }
+  public Integer getCrawlRate() {
+    return crawlRate;
+  }
 }

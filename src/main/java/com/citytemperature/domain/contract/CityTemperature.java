@@ -7,15 +7,15 @@ import java.time.LocalDate;
 
 public interface CityTemperature {
 
-    @JsonProperty("city")
-    String getCityName();
+  @JsonProperty("city")
+  String getCityName();
 
-    @JsonProperty("date")
-    LocalDate getDateThisTemperatureIsExpected();
+  @JsonProperty("date")
+  LocalDate getDateThisTemperatureIsExpected();
 
-    @JsonProperty("temperatureInCelsius")
-    BigDecimal getTemperatureInCelsius();
+  @JsonProperty("temperatureInCelsius")
+  BigDecimal getTemperatureInCelsius();
 
-    @JsonProperty("temperatureInFahrenheit")
-    BigDecimal getTemperatureInFahrenheit();
+  @JsonProperty("temperatureInFahrenheit")
+  BigDecimal getTemperatureInFahrenheit();
 }

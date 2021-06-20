@@ -4,54 +4,55 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MetaWeatherWoeidResponse {
 
-    private String title;
+  private String title;
 
-    @JsonProperty("location_type")
-    private String locationType;
-    private Integer woeid;
+  @JsonProperty("location_type")
+  private String locationType;
 
-    @JsonProperty("latt_long")
-    private String latLong;
+  private Integer woeid;
 
-    public MetaWeatherWoeidResponse(final String title, final String locationType, final Integer woeid, final String lat) {
-        this.title = title;
-        this.locationType = locationType;
-        this.woeid = woeid;
-        this.latLong = lat;
-    }
+  @JsonProperty("latt_long")
+  private String latLong;
 
-    public MetaWeatherWoeidResponse() {
-    }
+  public MetaWeatherWoeidResponse(
+      final String title, final String locationType, final Integer woeid, final String lat) {
+    this.title = title;
+    this.locationType = locationType;
+    this.woeid = woeid;
+    this.latLong = lat;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public MetaWeatherWoeidResponse() {}
 
-    public void setTitle(final String title) {
-        this.title = title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public String getLocationType() {
-        return locationType;
-    }
+  public void setTitle(final String title) {
+    this.title = title;
+  }
 
-    public void setLocationType(final String locationType) {
-        this.locationType = locationType;
-    }
+  public String getLocationType() {
+    return locationType;
+  }
 
-    public Integer getWoeid() {
-        return woeid;
-    }
+  public void setLocationType(final String locationType) {
+    this.locationType = locationType;
+  }
 
-    public void setWoeid(final Integer woeid) {
-        this.woeid = woeid;
-    }
+  public Integer getWoeid() {
+    return woeid;
+  }
 
-    public String getLatLong() {
-        return latLong;
-    }
+  public void setWoeid(final Integer woeid) {
+    this.woeid = woeid;
+  }
 
-    public void setLatLong(final String latLong) {
-        this.latLong = latLong;
-    }
+  public String getLatLong() {
+    return latLong;
+  }
+
+  public void setLatLong(final String latLong) {
+    this.latLong = latLong;
+  }
 }

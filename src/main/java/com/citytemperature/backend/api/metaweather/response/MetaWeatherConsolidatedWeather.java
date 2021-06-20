@@ -10,104 +10,106 @@ import java.time.LocalDateTime;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MetaWeatherConsolidatedWeather {
 
-    @JsonProperty("id")
-    private Long id;
+  @JsonProperty("id")
+  private Long id;
 
-    @JsonProperty("weather_state_name")
-    private String weatherStateName;
+  @JsonProperty("weather_state_name")
+  private String weatherStateName;
 
-    @JsonProperty("weather_state_abbr")
-    private String weatherStateAbbr;
+  @JsonProperty("weather_state_abbr")
+  private String weatherStateAbbr;
 
-    @JsonProperty("wind_direction_compass")
-    private String windDirectionCompass;
-    private LocalDateTime created;
+  @JsonProperty("wind_direction_compass")
+  private String windDirectionCompass;
 
-    @JsonProperty("applicable_date")
-    private LocalDate applicableDate;
+  private LocalDateTime created;
 
-    @JsonProperty("min_temp")
-    private BigDecimal minTemp;
+  @JsonProperty("applicable_date")
+  private LocalDate applicableDate;
 
-    @JsonProperty("max_temp")
-    private BigDecimal maxTemp;
+  @JsonProperty("min_temp")
+  private BigDecimal minTemp;
 
-    @JsonProperty("the_temp")
-    private BigDecimal theTemp;
+  @JsonProperty("max_temp")
+  private BigDecimal maxTemp;
 
-    @JsonProperty("wind_speed")
-    private BigDecimal windSpeed;
+  @JsonProperty("the_temp")
+  private BigDecimal theTemp;
 
-    @JsonProperty("wind_direction")
-    private BigDecimal windDirection;
+  @JsonProperty("wind_speed")
+  private BigDecimal windSpeed;
 
-    @JsonProperty("air_pressure")
-    private BigDecimal airPressure;
-    private Integer humidity;
-    private BigDecimal visibility;
-    private Integer predictability;
+  @JsonProperty("wind_direction")
+  private BigDecimal windDirection;
 
-    public MetaWeatherConsolidatedWeather() {
-        // Jackson uses this.
-    }
+  @JsonProperty("air_pressure")
+  private BigDecimal airPressure;
 
-    public Long getId() {
-        return id;
-    }
+  private Integer humidity;
+  private BigDecimal visibility;
+  private Integer predictability;
 
-    public String getWeatherStateName() {
-        return weatherStateName;
-    }
+  public MetaWeatherConsolidatedWeather() {
+    // Jackson uses this.
+  }
 
-    public String getWeatherStateAbbr() {
-        return weatherStateAbbr;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getWindDirectionCompass() {
-        return windDirectionCompass;
-    }
+  public String getWeatherStateName() {
+    return weatherStateName;
+  }
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
+  public String getWeatherStateAbbr() {
+    return weatherStateAbbr;
+  }
 
-    public LocalDate getApplicableDate() {
-        return applicableDate;
-    }
+  public String getWindDirectionCompass() {
+    return windDirectionCompass;
+  }
 
-    public BigDecimal getMinTemp() {
-        return minTemp;
-    }
+  public LocalDateTime getCreated() {
+    return created;
+  }
 
-    public BigDecimal getMaxTemp() {
-        return maxTemp;
-    }
+  public LocalDate getApplicableDate() {
+    return applicableDate;
+  }
 
-    public BigDecimal getTheTemp() {
-        return theTemp;
-    }
+  public BigDecimal getMinTemp() {
+    return minTemp;
+  }
 
-    public BigDecimal getWindSpeed() {
-        return windSpeed;
-    }
+  public BigDecimal getMaxTemp() {
+    return maxTemp;
+  }
 
-    public BigDecimal getWindDirection() {
-        return windDirection;
-    }
+  public BigDecimal getTheTemp() {
+    return theTemp;
+  }
 
-    public BigDecimal getAirPressure() {
-        return airPressure;
-    }
+  public BigDecimal getWindSpeed() {
+    return windSpeed;
+  }
 
-    public Integer getHumidity() {
-        return humidity;
-    }
+  public BigDecimal getWindDirection() {
+    return windDirection;
+  }
 
-    public BigDecimal getVisibility() {
-        return visibility;
-    }
+  public BigDecimal getAirPressure() {
+    return airPressure;
+  }
 
-    public Integer getPredictability() {
-        return predictability;
-    }
+  public Integer getHumidity() {
+    return humidity;
+  }
+
+  public BigDecimal getVisibility() {
+    return visibility;
+  }
+
+  public Integer getPredictability() {
+    return predictability;
+  }
 }
