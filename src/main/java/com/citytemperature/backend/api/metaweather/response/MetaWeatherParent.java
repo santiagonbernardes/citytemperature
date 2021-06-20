@@ -9,7 +9,7 @@ public class MetaWeatherParent {
 
     @JsonProperty("location_type")
     private String locationType;
-    private String woeid;
+    private Integer woeid;
 
     @JsonProperty("latt_long")
     private String latLong;
@@ -26,7 +26,7 @@ public class MetaWeatherParent {
         return locationType;
     }
 
-    public String getWoeid() {
+    public Integer getWoeid() {
         return woeid;
     }
 

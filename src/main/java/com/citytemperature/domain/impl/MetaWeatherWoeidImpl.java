@@ -7,22 +7,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MetaWeatherWoeidImpl implements Woeid {
 
-    @JsonProperty("woeid")
-    private String id;
+    private final Integer id;
+    private final String type;
 
-    @JsonProperty("location_type")
-    private String type;
-
-    public MetaWeatherWoeidImpl(final String id, final String type) {
+    public MetaWeatherWoeidImpl(@JsonProperty("woeid") final Integer id, @JsonProperty("location_type") final String type) {
         this.id = id;
         this.type = type;
     }
 
-    public MetaWeatherWoeidImpl() {
-    }
-
     @Override
-    public String getId() {
+    public Integer getId() {
         return this.id;
     }
 

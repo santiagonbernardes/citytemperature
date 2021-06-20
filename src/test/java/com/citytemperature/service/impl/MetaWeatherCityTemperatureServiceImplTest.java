@@ -54,7 +54,7 @@ class MetaWeatherCityTemperatureServiceImplTest {
         this.helper = new MockResponseHelper();
 
         // sets a default behavior for this service, so I don't need to write it every time.
-        final List<Woeid> defaultReturn = Collections.singletonList(new MetaWeatherWoeidImpl("484848", "City"));
+        final List<Woeid> defaultReturn = Collections.singletonList(new MetaWeatherWoeidImpl(484848, "City"));
         when(this.woeidServiceMock.findAllWoeidByCitiesName(any())).thenReturn(defaultReturn);
     }
 
@@ -72,8 +72,8 @@ class MetaWeatherCityTemperatureServiceImplTest {
 
     @Test
     void shouldTakeTheFirstWoeidReturnedByWoeidServiceAndUseItsIdToSearchForTemperatures() {
-        final MetaWeatherWoeidImpl firstInList = spy(new MetaWeatherWoeidImpl("Id", "City"));
-        final MetaWeatherWoeidImpl secondInList = spy(new MetaWeatherWoeidImpl());
+        final MetaWeatherWoeidImpl firstInList = spy(new MetaWeatherWoeidImpl(1, "City"));
+        final MetaWeatherWoeidImpl secondInList = spy(new MetaWeatherWoeidImpl(2, "Any"));
         final List<Woeid> returnedWoeid = Arrays.asList(firstInList, secondInList);
         when(this.woeidServiceMock.findAllWoeidByCitiesName(any())).thenReturn(returnedWoeid);
         final MetaWeatherConsolidatedWeatherMock returned = new MetaWeatherConsolidatedWeatherMock(LocalDate.now(), 27.8);

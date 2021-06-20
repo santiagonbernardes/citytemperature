@@ -48,8 +48,8 @@ class MetaWeatherWoeidServiceImplTest {
         final MetaWeatherWoeidResponse serverResponseBody = MetaWeatherWoeidResponseBuilder.builder()
                 .withTitle("San Francisco")
                 .withLocationType("City")
-                .withWoeid("2487956")
-                .withLattLong("37.777119, -122.41964")
+                .withWoeid(2487956)
+                .withLatLong("37.777119, -122.41964")
                 .build();
         this.mockServer.enqueue(this.helper.getMockResponseStatusCode200(Collections.singletonList(serverResponseBody)));
         final List<Woeid> citiesWoeid = this.underTest.findAllWoeidByCitiesName("Any city name.");
@@ -104,7 +104,7 @@ class MetaWeatherWoeidServiceImplTest {
 
     @Test
     void shouldReturnAListContainingAllObjectsReturnedByTheBackendApi() {
-        final List<String> expectedIds = Arrays.asList("454578", "123456789", "30405060708090", "4", "102030405", "70109");
+        final List<Integer> expectedIds = Arrays.asList(454578, 123456789, 30405060, 4, 102030405, 70109);
         final List<MetaWeatherWoeidResponse> serverResponseBody = expectedIds.stream()
                 .map(id -> MetaWeatherWoeidResponseBuilder.builder()
                         .withDefaultDataAndLocationTypeCity()

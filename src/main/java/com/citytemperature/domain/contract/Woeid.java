@@ -1,7 +1,7 @@
 package com.citytemperature.domain.contract;
 
 public interface Woeid {
-    String getId();
+    Integer getId();
 
     String getType();
 }

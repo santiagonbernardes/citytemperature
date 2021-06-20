@@ -8,16 +8,16 @@ public class MetaWeatherWoeidResponse {
 
     @JsonProperty("location_type")
     private String locationType;
-    private String woeid;
+    private Integer woeid;
 
     @JsonProperty("latt_long")
-    private String lattLong;
+    private String latLong;
 
-    public MetaWeatherWoeidResponse(final String title, final String locationType, final String woeid, final String lat) {
+    public MetaWeatherWoeidResponse(final String title, final String locationType, final Integer woeid, final String lat) {
         this.title = title;
         this.locationType = locationType;
         this.woeid = woeid;
-        this.lattLong = lat;
+        this.latLong = lat;
     }
 
     public MetaWeatherWoeidResponse() {
@@ -39,19 +39,19 @@ public class MetaWeatherWoeidResponse {
         this.locationType = locationType;
     }
 
-    public String getWoeid() {
+    public Integer getWoeid() {
         return woeid;
     }
 
-    public void setWoeid(final String woeid) {
+    public void setWoeid(final Integer woeid) {
         this.woeid = woeid;
     }
 
-    public String getLattLong() {
-        return lattLong;
+    public String getLatLong() {
+        return latLong;
     }
 
-    public void setLattLong(final String lattLong) {
-        this.lattLong = lattLong;
+    public void setLatLong(final String latLong) {
+        this.latLong = latLong;
     }
 }

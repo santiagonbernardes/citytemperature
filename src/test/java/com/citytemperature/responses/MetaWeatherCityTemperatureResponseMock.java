@@ -29,7 +29,7 @@ public class MetaWeatherCityTemperatureResponseMock {
     private final String locationType;
 
     @JsonProperty("woeid")
-    private final Long woeid;
+    private final Integer woeid;
 
     @JsonProperty("latt_long")
     private final String latLong;
@@ -48,7 +48,7 @@ public class MetaWeatherCityTemperatureResponseMock {
         this.sources = Arrays.asList(MetaWeatherSourceMock.values());
         this.title = title;
         this.locationType = "City";
-        this.woeid = 44418L;
+        this.woeid = 44418;
         this.latLong = "51.506321,-0.12714";
         this.timezone = "Europe/London";
     }
@@ -89,7 +89,7 @@ public class MetaWeatherCityTemperatureResponseMock {
         return locationType;
     }
 
-    public Long getWoeid() {
+    public Integer getWoeid() {
         return woeid;
     }
 

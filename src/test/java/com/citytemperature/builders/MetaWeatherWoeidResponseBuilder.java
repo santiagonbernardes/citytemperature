@@ -24,21 +24,21 @@ public class MetaWeatherWoeidResponseBuilder {
         return this;
     }
 
-    public MetaWeatherWoeidResponseBuilder withWoeid(final String woeid) {
+    public MetaWeatherWoeidResponseBuilder withWoeid(final Integer woeid) {
         this.target.setWoeid(woeid);
         return this;
     }
 
-    public MetaWeatherWoeidResponseBuilder withLattLong(final String lattLong) {
-        this.target.setLattLong(lattLong);
+    public MetaWeatherWoeidResponseBuilder withLatLong(final String latLong) {
+        this.target.setLatLong(latLong);
         return this;
     }
 
     public MetaWeatherWoeidResponseBuilder withDefaultData() {
         this.target.setTitle("Default Title");
         this.target.setLocationType("Default LocationType");
-        this.target.setWoeid("Default Woeid");
-        this.target.setLattLong("Default LattLong");
+        this.target.setWoeid(9999);
+        this.target.setLatLong("Default LatLong");
         return this;
     }
 

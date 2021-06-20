@@ -29,7 +29,7 @@ public class MetaWeatherCityTemperatureResponse {
     private String locationType;
 
     @JsonProperty("woeid")
-    private Long woeid;
+    private Integer woeid;
 
     @JsonProperty("latt_long")
     private String latLong;
@@ -77,7 +77,7 @@ public class MetaWeatherCityTemperatureResponse {
         return locationType;
     }
 
-    public Long getWoeid() {
+    public Integer getWoeid() {
         return woeid;
     }
 
