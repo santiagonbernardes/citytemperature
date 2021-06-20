@@ -1,6 +1,7 @@
 package com.citytemperature.domain.impl;
 
 import com.citytemperature.domain.contract.CityTemperature;
+import com.citytemperature.helpers.TemperatureConverter;
 
 import java.time.LocalDate;
 
@@ -33,6 +34,6 @@ public class MetaWeatherCityTemperatureImpl implements CityTemperature {
 
     @Override
     public Double getTemperatureInFahrenheit() {
-        return null;
+        return TemperatureConverter.convertFromCelsiusToFahrenheit(this.temperatureInCelsius);
     }
 }
