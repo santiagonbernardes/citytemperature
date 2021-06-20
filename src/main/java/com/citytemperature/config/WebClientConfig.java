@@ -14,11 +14,14 @@ public class WebClientConfig {
 
     @Bean
     public WebClient getMetaWeatherWebClient(final ObjectMapper mapper) {
+        return buildWebClient("https://www.metaweather.com/api/location", mapper);
+    }
+
+    public static WebClient buildWebClient(final String baseUrl, final ObjectMapper mapper) {
         // By default Jackson can't understand LocalDateTime or ZonedDateTime. This method teaches Jackson how to understand them.
         mapper.registerModule(new JavaTimeModule());
-
         return WebClient.builder()
-                .baseUrl("https://www.metaweather.com/api/location")
+                .baseUrl(baseUrl)
                 // Adding the configured mapper to the webclient.
                 .codecs(clientCodecConfigurer -> clientCodecConfigurer
                         .defaultCodecs().jackson2JsonDecoder(new Jackson2JsonDecoder(mapper, MediaType.APPLICATION_JSON)))

@@ -1,5 +1,6 @@
 package com.citytemperature.service.impl;
 
+import com.citytemperature.config.WebClientConfig;
 import com.citytemperature.domain.contract.CityTemperature;
 import com.citytemperature.domain.contract.Woeid;
 import com.citytemperature.domain.impl.MetaWeatherWoeidImpl;
@@ -7,11 +8,11 @@ import com.citytemperature.exceptions.CityNotFoundException;
 import com.citytemperature.exceptions.CityTemperatureNotFoundException;
 import com.citytemperature.exceptions.MetaWeatherIntegrationException;
 import com.citytemperature.helpers.MockResponseHelper;
-import com.citytemperature.helpers.TestWebClientHelper;
 import com.citytemperature.responses.MetaWeatherCityTemperatureResponseMock;
 import com.citytemperature.responses.MetaWeatherConsolidatedWeatherMock;
 import com.citytemperature.service.contract.CityTemperatureService;
 import com.citytemperature.service.contract.WoeidService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +23,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
@@ -52,7 +52,8 @@ class MetaWeatherCityTemperatureServiceImplTest {
     void setupTestsVariables() throws IOException {
         this.mockServer = new MockWebServer();
         this.mockServer.start();
-        underTest = new MetaWeatherCityTemperatureServiceImpl(this.woeidServiceMock, TestWebClientHelper.buildTestWebClient(mockServer.getHostName(), mockServer.getPort()));
+        final String baseUrl = String.format("http://%s:%s", mockServer.getHostName(), mockServer.getPort());
+        underTest = new MetaWeatherCityTemperatureServiceImpl(this.woeidServiceMock, WebClientConfig.buildWebClient(baseUrl, new ObjectMapper()));
         this.helper = new MockResponseHelper();
 
         // sets a default behavior for this service, so I don't need to write it every time.

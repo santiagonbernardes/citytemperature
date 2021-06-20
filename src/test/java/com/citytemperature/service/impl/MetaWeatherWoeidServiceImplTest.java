@@ -1,12 +1,13 @@
 package com.citytemperature.service.impl;
 
 import com.citytemperature.builders.MetaWeatherWoeidResponseBuilder;
+import com.citytemperature.config.WebClientConfig;
 import com.citytemperature.domain.contract.Woeid;
 import com.citytemperature.exceptions.MetaWeatherIntegrationException;
 import com.citytemperature.helpers.MockResponseHelper;
-import com.citytemperature.helpers.TestWebClientHelper;
 import com.citytemperature.responses.MetaWeatherWoeidResponse;
 import com.citytemperature.service.contract.WoeidService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +35,8 @@ class MetaWeatherWoeidServiceImplTest {
     void setupTestsVariables() throws IOException {
         this.mockServer = new MockWebServer();
         this.mockServer.start();
-        underTest = new MetaWeatherWoeidServiceImpl(TestWebClientHelper.buildTestWebClient(this.mockServer.getHostName(), this.mockServer.getPort()));
+        final String baseUrl = String.format("http://%s:%s", mockServer.getHostName(), mockServer.getPort());
+        underTest = new MetaWeatherWoeidServiceImpl(WebClientConfig.buildWebClient(baseUrl, new ObjectMapper()));
         this.helper = new MockResponseHelper();
     }
 
