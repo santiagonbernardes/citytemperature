@@ -19,7 +19,7 @@ From your OS command line, access the folder where you cloned this project in. T
 gradlew :bootRun
 ```
 
-- On OSX/Linus
+- On OSX/Linux
 
 ```shell
 ./gradlew :bootRun
@@ -37,8 +37,28 @@ You can also run all the unit tests implemented for this application. Run the co
 gradlew test
 ```
 
-- On OSX/Linus
+- On OSX/Linux
 
 ```shell
 ./gradlew test
 ```
+
+## API interface decisions
+### Why did you chose this request interface?
+In this domain, cities became a resource. In the long run, this decision makes possible to add more services regarding cities, such as fetching their population.
+An example would be the route GET /api/v1/cities/{cityName}/population.
+
+That said, I set city name as a resource identifier and this is the reason cityName is a path param.
+
+I know that might be a city with the same name as another and, in that case, we can use other feature like query strings.
+
+The action on the only route of this API is retrieval of a resource representation. This is why the http method is GET.
+
+### Why did you chose this response interface?
+To begin with, I tried to make the best use possible of http status code. 200 on success, 404 on not found and 500 on internal server error.
+
+In this first version, I have decided to return a date field to make clear for the user when that temperature might happen.
+
+Also, since its possible that the user inputs characters that does not make a complete city name, I have decided to make clear what is the city returned.
+
+The temperature fields are a simplification since they represent the average temperature of that day. 
